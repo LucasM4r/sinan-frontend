@@ -658,7 +658,7 @@ const sections = [
 ] as const satisfies readonly NotificationSectionDefinition[]
 
 export const schistosomiasisNotificationDefinition = defineNotificationType({
-  id: 11,
+  id: 5,
   slug: "schistosomiasis",
   label: "ESQUISTOSSOMOSE",
   description: `Caso CONFIRMADO: Todo indivíduo que apresente ovos viáveis de Schistosoma mansoni nas fezes ou em tecido submetido à biópsia.`,
