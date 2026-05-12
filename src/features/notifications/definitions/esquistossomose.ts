@@ -16,88 +16,9 @@ const optionalTextSchema = z.string().optional();
 
 const sections = [
   {
-    id: "notification_data",
-    title: "Dados Gerais",
-    description: "Informações sobre a notificação e unidade notificadora.",
-    columns: 3,
-    fields: [
-      {
-        name: "tp_notification",
-        label: "Tipo de Notificação",
-        kind: "select",
-        schema: z.string().default("2"),
-        defaultValue: "2",
-        options: [{ label: "Individual", value: "2" }],
-      },
-      {
-        name: "ds_disease",
-        label: "Agravo/doença",
-        kind: "text",
-        schema: z.string(),
-        defaultValue: "ESQUISTOSSOMOSE",
-      },
-      {
-        name: "ds_cid10",
-        label: "Código (CID10)",
-        kind: "text",
-        schema: z.string().default("B 65.9"),
-        defaultValue: "B 65.9",
-      },
-      {
-        name: "dt_notification",
-        label: "Data da Notificação",
-        kind: "date",
-        schema: z.string().min(1, "Obrigatório"),
-        defaultValue: "",
-      },
-      {
-        name: "notification_uf",
-        label: "UF",
-        kind: "text",
-        schema: z.string().length(2, "UF obrigatória"),
-        defaultValue: "",
-      },
-      {
-        name: "notification_city",
-        label: "Município de Notificação",
-        kind: "text",
-        schema: z.string().min(1, "Município obrigatório"),
-        defaultValue: "",
-      },
-      {
-        name: "notification_city_ibge_code",
-        label: "Código (IBGE)",
-        kind: "text",
-        schema: optionalTextSchema,
-        defaultValue: "",
-      },
-      {
-        name: "health_unit_name",
-        label: "Unidade de Saúde (ou outra fonte notificadora)",
-        kind: "text",
-        schema: z.string().min(1, "Unidade obrigatória"),
-        defaultValue: "",
-      },
-      {
-        name: "health_unit_code",
-        label: "Código",
-        kind: "text",
-        schema: optionalTextSchema,
-        defaultValue: "",
-      },
-      {
-        name: "dt_first_symptoms",
-        label: "Data dos Primeiros Sintomas",
-        kind: "date",
-        schema: optionalTextSchema,
-        defaultValue: "",
-      },
-    ],
-  },
-  {
     id: "patient_data",
-    title: "Notificação Individual",
-    description: "Dados do paciente notificado.",
+    title: "Dados do Paciente",
+    description:  "Capture o retrato do paciente na notificacao, mesmo quando ele ja existe no cadastro geral.",
     columns: 3,
     fields: [
       {
@@ -105,6 +26,13 @@ const sections = [
         label: "Nome do Paciente",
         kind: "text",
         schema: z.string().min(1, "Nome obrigatório"),
+        defaultValue: "",
+      },
+      {
+        name: "patient_cpf",
+        label: "CPF",
+        kind: "text",
+        schema: z.string().min(11, "CPF obrigatorio"),
         defaultValue: "",
       },
       {
