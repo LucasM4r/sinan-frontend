@@ -500,7 +500,7 @@ const sections = [
 ] as const satisfies readonly NotificationSectionDefinition[]
 
 export const epizootyNotificationDefinition = defineNotificationType({
-  id: 10,
+  id: 4,
   slug: "epizooty",
   label: "EPIZOOTIA",
   description: `Definição do caso: Animal ou grupo de animais encontrados doentes e/ou mortos, incluindo ossadas, sem causa definida, que podem preceder a ocorrência de doenças em humanos.`,
