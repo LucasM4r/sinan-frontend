@@ -3,6 +3,7 @@ import { venomousAnimalNotificationDefinition } from "@/features/notifications/d
 
 import { botulismNotificationDefinition } from "@/features/notifications/definitions/botulism"
 import { choleraNotificationDefinition } from "@/features/notifications/definitions/cholera"
+import { whoopingCoughNotificationDefinition } from "@/features/notifications/definitions/whooping-cough"
 
 export { aidsNotificationDefinition, venomousAnimalNotificationDefinition, botulismNotificationDefinition, choleraNotificationDefinition }
 export * from "@/features/notifications/definitions/shared"
@@ -12,6 +13,7 @@ export const notificationTypeDefinitionList = [
   venomousAnimalNotificationDefinition,
   botulismNotificationDefinition,
   choleraNotificationDefinition,
+  whoopingCoughNotificationDefinition,
 ] as const
 
 export const notificationTypeDefinitions = {
@@ -19,4 +21,5 @@ export const notificationTypeDefinitions = {
   venomous_animal: venomousAnimalNotificationDefinition,
   botulism: botulismNotificationDefinition,
   cholera: choleraNotificationDefinition,
+  whooping_cough: whoopingCoughNotificationDefinition,
 } as const
