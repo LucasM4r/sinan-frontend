@@ -3,12 +3,8 @@ import { z } from "zod";
 import {
     defineNotificationType,
     educationLevelOptions,
-    healthOutcomeOptions,
-    ministryProtocolOptions,
     raceColorOptions,
-    screeningTestOptions,
     sexOptions,
-    yesNoUnknownOptions,
     type NotificationSectionDefinition,
 } from "@/features/notifications/definitions/shared"
 

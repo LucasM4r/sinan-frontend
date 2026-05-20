@@ -3,10 +3,7 @@ import { z } from "zod";
 import {
     defineNotificationType,
     educationLevelOptions,
-    healthOutcomeOptions,
-    ministryProtocolOptions,
     raceColorOptions,
-    screeningTestOptions,
     sexOptions,
     yesNoUnknownOptions,
     type NotificationSectionDefinition,
@@ -863,10 +860,10 @@ const sections = [
 
 ] as const satisfies readonly NotificationSectionDefinition[]
 
-export const dengueChikungunyaNotificationDefinition = defineNotificationType({
-  id: 6,
-  slug: "dengue_chikungunya",
-  label: "DENGUE - CHIKUNGUNYA",
+export const chikungunyaFeverNotificationDefinition = defineNotificationType({
+  id: 11,
+  slug: "chikungunya_fever",
+  label: "Febre de Chikungunya",
   description: `CASO SUSPEITO de dengue: Pessoa que viva ou tenha viajado nos últimos 14 dias para área onde esteja ocorrendo transmissão de dengue ou tenha presença de Ae.aegypti, que apresente febre, usualmente entre 2 e 7 dias, e apresente duas ou mais das seguintes manifestações: cefaleia, dor retroorbital, petéquias ou prova do laço positiva e leucopenia.\nCASO SUSPEITO de chikungunya: Febre de início súbito e artralgia ou artrite intensa com início agudo, não explicado por outras condições, que resida ou tenha viajado para áreas endêmicas, ou epidêmicas até 14 dias antes do início dos sintomas, ou que tenha vínculo epidemiológico com um caso importado confirmado.`,
   sections,
 })

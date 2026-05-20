@@ -1,28 +1,54 @@
 import { aidsNotificationDefinition } from "@/features/notifications/definitions/aids"
-import { venomousAnimalNotificationDefinition } from "@/features/notifications/definitions/venomous-animal"
-
+import { antiRabiesNotificationDefinition } from "@/features/notifications/definitions/anti_rabies"
 import { botulismNotificationDefinition } from "@/features/notifications/definitions/botulism"
 import { choleraNotificationDefinition } from "@/features/notifications/definitions/cholera"
-import { whoopingCoughNotificationDefinition } from "@/features/notifications/definitions/whooping-cough"
+import { chikungunyaFeverNotificationDefinition } from "@/features/notifications/definitions/Febre-de-Chikungunya"
 import { dengueChikungunyaNotificationDefinition } from "@/features/notifications/definitions/dengue"
+import { epizootyNotificationDefinition } from "@/features/notifications/definitions/epizootia"
+import { schistosomiasisNotificationDefinition } from "@/features/notifications/definitions/esquistossomose"
+import { yellowFeverNotificationDefinition } from "@/features/notifications/definitions/febre-amarela"
+import { venomousAnimalNotificationDefinition } from "@/features/notifications/definitions/venomous-animal"
+import { whoopingCoughNotificationDefinition } from "@/features/notifications/definitions/whooping-cough"
 
-export { aidsNotificationDefinition, venomousAnimalNotificationDefinition, botulismNotificationDefinition, choleraNotificationDefinition, whoopingCoughNotificationDefinition, dengueChikungunyaNotificationDefinition }
+export {
+  aidsNotificationDefinition,
+  antiRabiesNotificationDefinition,
+  botulismNotificationDefinition,
+  chikungunyaFeverNotificationDefinition,
+  choleraNotificationDefinition,
+  dengueChikungunyaNotificationDefinition,
+  epizootyNotificationDefinition,
+  schistosomiasisNotificationDefinition,
+  yellowFeverNotificationDefinition,
+  venomousAnimalNotificationDefinition,
+  whoopingCoughNotificationDefinition,
+}
 export * from "@/features/notifications/definitions/shared"
 
 export const notificationTypeDefinitionList = [
   aidsNotificationDefinition,
   venomousAnimalNotificationDefinition,
   botulismNotificationDefinition,
+  epizootyNotificationDefinition,
+  schistosomiasisNotificationDefinition,
+  yellowFeverNotificationDefinition,
   choleraNotificationDefinition,
   whoopingCoughNotificationDefinition,
   dengueChikungunyaNotificationDefinition,
+  antiRabiesNotificationDefinition,
+  chikungunyaFeverNotificationDefinition,
 ] as const
 
 export const notificationTypeDefinitions = {
   aids: aidsNotificationDefinition,
   venomous_animal: venomousAnimalNotificationDefinition,
   botulism: botulismNotificationDefinition,
+  epizooty: epizootyNotificationDefinition,
+  schistosomiasis: schistosomiasisNotificationDefinition,
+  yellow_fever: yellowFeverNotificationDefinition,
   cholera: choleraNotificationDefinition,
   whooping_cough: whoopingCoughNotificationDefinition,
   dengue_chikungunya: dengueChikungunyaNotificationDefinition,
+  anti_rabies: antiRabiesNotificationDefinition,
+  chikungunya_fever: chikungunyaFeverNotificationDefinition,
 } as const

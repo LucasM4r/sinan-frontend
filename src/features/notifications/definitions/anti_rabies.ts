@@ -3,10 +3,7 @@ import { z } from "zod";
 import {
     defineNotificationType,
     educationLevelOptions,
-    healthOutcomeOptions,
-    ministryProtocolOptions,
     raceColorOptions,
-    screeningTestOptions,
     sexOptions,
     yesNoUnknownOptions,
     woundsOptions,
@@ -331,7 +328,7 @@ const sections = [
 ] as const satisfies readonly NotificationSectionDefinition[];
 
 export const antiRabiesNotificationDefinition = defineNotificationType({
-    id: 9,
+    id: 10,
     slug: "anti_rabies",
     label: "Atendimento Antirrábico",
     description: "Notificação de atendimento antirrábico humano após exposição ao vírus rábico.",

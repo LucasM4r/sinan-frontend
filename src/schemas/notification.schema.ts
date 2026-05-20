@@ -41,12 +41,36 @@ export const notificationSchema = z.discriminatedUnion(
       form_data: notificationTypeDefinitions.botulism.formSchema,
     }),
     notificationBaseSchema.extend({
+      notification_type_slug: z.literal("epizooty"),
+      form_data: notificationTypeDefinitions.epizooty.formSchema,
+    }),
+    notificationBaseSchema.extend({
+      notification_type_slug: z.literal("schistosomiasis"),
+      form_data: notificationTypeDefinitions.schistosomiasis.formSchema,
+    }),
+    notificationBaseSchema.extend({
+      notification_type_slug: z.literal("yellow_fever"),
+      form_data: notificationTypeDefinitions.yellow_fever.formSchema,
+    }),
+    notificationBaseSchema.extend({
       notification_type_slug: z.literal("cholera"),
       form_data: notificationTypeDefinitions.cholera.formSchema,
     }),
     notificationBaseSchema.extend({
       notification_type_slug: z.literal("whooping_cough"),
       form_data: notificationTypeDefinitions.whooping_cough.formSchema,
+    }),
+    notificationBaseSchema.extend({
+      notification_type_slug: z.literal("dengue_chikungunya"),
+      form_data: notificationTypeDefinitions.dengue_chikungunya.formSchema,
+    }),
+    notificationBaseSchema.extend({
+      notification_type_slug: z.literal("anti_rabies"),
+      form_data: notificationTypeDefinitions.anti_rabies.formSchema,
+    }),
+    notificationBaseSchema.extend({
+      notification_type_slug: z.literal("chikungunya_fever"),
+      form_data: notificationTypeDefinitions.chikungunya_fever.formSchema,
     }),
   ]
 )
@@ -66,12 +90,36 @@ export const notificationFormSchema = z
       form_data: notificationTypeDefinitions.botulism.draftFormSchema,
     }),
     notificationFormBaseSchema.extend({
+      notification_type_slug: z.literal("epizooty"),
+      form_data: notificationTypeDefinitions.epizooty.draftFormSchema,
+    }),
+    notificationFormBaseSchema.extend({
+      notification_type_slug: z.literal("schistosomiasis"),
+      form_data: notificationTypeDefinitions.schistosomiasis.draftFormSchema,
+    }),
+    notificationFormBaseSchema.extend({
+      notification_type_slug: z.literal("yellow_fever"),
+      form_data: notificationTypeDefinitions.yellow_fever.draftFormSchema,
+    }),
+    notificationFormBaseSchema.extend({
       notification_type_slug: z.literal("cholera"),
       form_data: notificationTypeDefinitions.cholera.draftFormSchema,
     }),
     notificationFormBaseSchema.extend({
       notification_type_slug: z.literal("whooping_cough"),
       form_data: notificationTypeDefinitions.whooping_cough.draftFormSchema,
+    }),
+    notificationFormBaseSchema.extend({
+      notification_type_slug: z.literal("dengue_chikungunya"),
+      form_data: notificationTypeDefinitions.dengue_chikungunya.draftFormSchema,
+    }),
+    notificationFormBaseSchema.extend({
+      notification_type_slug: z.literal("anti_rabies"),
+      form_data: notificationTypeDefinitions.anti_rabies.draftFormSchema,
+    }),
+    notificationFormBaseSchema.extend({
+      notification_type_slug: z.literal("chikungunya_fever"),
+      form_data: notificationTypeDefinitions.chikungunya_fever.draftFormSchema,
     }),
   ])
   .superRefine((values, ctx) => {
