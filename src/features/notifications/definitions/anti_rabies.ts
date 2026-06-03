@@ -70,7 +70,7 @@ const generalSection = {
 } satisfies NotificationSectionDefinition;
 
 // -----------------------------------------------------------------------------
-// 2. DADOS DO PACIENTE (Campos 8 a 16)
+// 2. DADOS DO PACIENTE (Campos 8 a 16 e 31)
 // -----------------------------------------------------------------------------
 const patientSection = {
     id: "patient",
@@ -149,6 +149,13 @@ const patientSection = {
         {
             name: "mother_name",
             label: "Nome da mãe",
+            kind: "text",
+            schema: optionalTextSchema,
+            defaultValue: "",
+        },
+        {
+            name: "occupation",
+            label: "Ocupação",
             kind: "text",
             schema: optionalTextSchema,
             defaultValue: "",
@@ -272,7 +279,14 @@ const residenceSection = {
     ],
 } satisfies NotificationSectionDefinition;
 
-// 32 -Tipo de Exposição ao Vírus Rábico
+// -----------------------------------------------------------------------------
+// Dados Complementares do Caso
+// ----------------------------------------------------------------------------- 
+
+// -----------------------------------------------------------------------------
+// 4. Antecedentes Epidemiológicos (Campo 32)
+// ----------------------------------------------------------------------------- 
+
 const exposureTypeSection = {
     id: "exposure_type",
     title: "Tipo de Exposição ao Vírus Rábico",
@@ -322,7 +336,10 @@ const exposureTypeSection = {
     ],
 } satisfies NotificationSectionDefinition;
 
-// 33
+// -----------------------------------------------------------------------------
+// 4. Antecedentes Epidemiológicos (Campo 33)
+// ----------------------------------------------------------------------------- 
+
 const locationSection = {
     id: "location",
     title: "Localização",
@@ -380,6 +397,10 @@ const locationSection = {
     ],
 } satisfies NotificationSectionDefinition;
 
+// -----------------------------------------------------------------------------
+// 4. Antecedentes Epidemiológicos (Campos 34 e 35)
+// ----------------------------------------------------------------------------- 
+
 const woundSection = {
     id: "Wound",
     title: "Ferimento",
@@ -423,14 +444,23 @@ const woundSection = {
 
 } satisfies NotificationSectionDefinition;
 
+// -----------------------------------------------------------------------------
+// 4. Antecedentes Epidemiológicos (Campos 36 a 42)
+// ----------------------------------------------------------------------------- 
 const treatmentSection = {
     id: "treatment",
-    title: "Conduta e Tratamento Atual",
+    title: "Antecedentes Epidemiológicos",
     description: "Histórico de tratamentos e tratamento profilático indicado no atendimento.",
     columns: 2,
     fields: [
       {
-        //37
+        name: "expo_date",
+        label: "Data da Exposição",
+        kind: "date",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
         name: "previous_treatment",
         label: "Antecedentes de Tratamento Anti-Rábico?",
         kind: "select",
@@ -439,7 +469,61 @@ const treatmentSection = {
         options: yesNoUnknownOptions,
       },
       {
-        // 43 
+        name: "indicated_treatment",
+        label: "Se Houve antecedentes, quando foi concluído?",
+        kind: "select",
+        schema: z.string().min(1, "Campo obrigatório"),
+        defaultValue: "",
+        options: [
+                { label: "1 - Até 90 dias", value: "1" },
+                { label: "2 - Após 90 dias", value: "2" },
+        ], 
+      },
+      {
+        name: "dose_number",
+        label: "Nº de Doses Aplicadas",
+        kind: "number",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "animal_species",
+        label: "Espécie do Animal Agressor",
+        kind: "select",
+        schema: z.string().min(1, "Espécie obrigatória"),
+        defaultValue: "",
+        options: animalSpeciesOptions,
+      },
+      {
+        name: "animal_condition",
+        label: "Condição do Animal",
+        kind: "select",
+        schema: optionalTextSchema,
+        defaultValue: "",
+        options: animalConditionOptions,
+      },
+      {
+        name: "observable_animal",
+        label: "Animal Passível de Observação?",
+        kind: "select",
+        schema: optionalTextSchema,
+        defaultValue: "",
+        options: yesNoUnknownOptions,
+      },
+    ],
+} satisfies NotificationSectionDefinition;
+
+// -----------------------------------------------------------------------------
+// 5. Tratamento Atual (Campos 43 a 60)
+// ----------------------------------------------------------------------------- 
+
+const currentTreatmentSection = {
+    id: "current_Treatmen",
+    title: "Tratamento Atual",
+    description: "Informações sobre o tratamento atual.",
+    columns: 3,
+    fields: [
+        {
         name: "indicated_treatment",
         label: "Tratamento Indicado",
         kind: "select",
@@ -456,61 +540,68 @@ const treatmentSection = {
         ], 
       },
       {
-        // 53
-        name: "serum_indicated",
-        label: "Indicação do Soro Anti-Rábico?",
+        name: "vaccine_producer",
+        label: "Laboratório Produtor Vacina",
         kind: "select",
-        schema: optionalTextSchema,
+        schema: z.string().min(1, "Campo obrigatório"),
         defaultValue: "",
-        options: yesNoUnknownOptions,
+        options: [
+                { label: "1 - Instituto Butantan", value: "1" },
+                { label: "2 - Instituto Vital Brasil", value: "2" },
+                { label: "3 - Aventis Pasteur", value: "3" },
+                { label: "4- Outro", value: "4"},
+        ], 
       },
       {
-        // 59
-        name: "adverse_event",
-        label: "Evento Adverso à Vacina/Soro",
-        kind: "select",
-        schema: optionalTextSchema,
+        name: "lot_number",
+        label: "Número do Lote",
+        kind: "number",
+        schema: z.string().min(1, "Campo obrigatório"),
         defaultValue: "",
-        options: yesNoUnknownOptions,
-      },
-    ],
-} satisfies NotificationSectionDefinition;
-
-const animalAgressorSection = {
-    id: "animal_aggressor",
-    title: "Animal Agressor",
-    description: "Informações sobre o animal envolvido na exposição.",
-    columns: 2,
-    fields: [
-      {
-        // 40
-        name: "animal_species",
-        label: "Espécie do Animal Agressor",
-        kind: "select",
-        schema: z.string().min(1, "Espécie obrigatória"),
-        defaultValue: "",
-        options: animalSpeciesOptions,
       },
       {
-        //41
-        name: "animal_condition",
-        label: "Condição do Animal",
-        kind: "select",
-        schema: optionalTextSchema,
+        name: "expire_date",
+        label: "Data do Vencimento",
+        kind: "date",
+        schema: z.string().min(1, "Campo obrigatório"),
         defaultValue: "",
-        options: animalConditionOptions,
       },
       {
-        //42
-        name: "observable_animal",
-        label: "Animal Passível de Observação?",
-        kind: "select",
-        schema: optionalTextSchema,
+        name: "vaccine1_date",
+        label: "Data da 1a dose",
+        kind: "date",
+        schema: z.string().min(1, "Campo obrigatório"),
         defaultValue: "",
-        options: yesNoUnknownOptions,
       },
       {
-        //48
+        name: "vaccine2_date",
+        label: "Data da 2a dose",
+        kind: "date",
+        schema: z.string().min(1, "Campo obrigatório"),
+        defaultValue: "",
+      },
+      {
+        name: "vaccine3_date",
+        label: "Data da 3a dose",
+        kind: "date",
+        schema: z.string().min(1, "Campo obrigatório"),
+        defaultValue: "",
+      },
+      {
+        name: "vaccine4_date",
+        label: "Data da 4a dose",
+        kind: "date",
+        schema: z.string().min(1, "Campo obrigatório"),
+        defaultValue: "",
+      },
+      {
+        name: "vaccine5_date",
+        label: "Data da 5a dose",
+        kind: "date",
+        schema: z.string().min(1, "Campo obrigatório"),
+        defaultValue: "",
+      },
+      {
         name: "pos_observable_animal",
         label: "Condição Final do Animal (após período de observação)",
         kind: "select",
@@ -524,9 +615,124 @@ const animalAgressorSection = {
                 { label: "5 - Morto/ Sacrificado/ Sem Diagnóstico", value: "5"},
                 { label: "9 - Ignorado", value: "9" },
         ], 
-      }
+      },
+      {
+        name: "treatment_interruption",
+        label: "Houve Interrupção do Tratamento",
+        kind: "select",
+        schema: z.string().min(1, "Obrigatorio"),
+        defaultValue: "",
+        options: yesNoUnknownOptions,
+      },
+      {
+        name: "interruption_reason",
+        label: "Qual o Motivo da Interrupção?",
+        kind: "select",
+        schema: z.string().min(1, "Obrigatorio"),
+        defaultValue: "9",
+        options: [
+                { label: "1 - Indicação da Unidade de Saúde", value: "1" },
+                { label: "2 - Abandono", value: "2" },
+                { label: "3 - Transferência", value: "3" },
+                { label: "9 - Ignorado", value: "9" },
+        ], 
+      },
+      {
+        name: "adverse_event ",
+        label: "Evento Adverso à Vacina",
+        kind: "select",
+        schema: z.string().min(1, "Campo obrigatorio"),
+        defaultValue: "",
+        options: yesNoUnknownOptions,
+      },
+      {
+        name: "treatment_interruption_call",
+        label: "Se houve Abandono do Tratamento, a Unidade de Saúde Procurou o Paciente",
+        kind: "select",
+        schema: z.string().min(1, "Campo obrigatorio"),
+        defaultValue: "",
+        options: yesNoUnknownOptions,
+      },
+      {
+        name: "patient_weight",
+        label: "Peso do Paciente (Kg)",
+        kind: "number",
+        schema: z.string().min(1, "Campo obrigatorio"),
+        defaultValue: "",
+      },
+      {
+        name: "type_serum ",
+        label: "Tipo de Soro Aplicada",
+        kind: "number",
+        schema: z.string().min(1, "Campo obrigatorio"),
+        defaultValue: "",
+        options: [
+                { label: "1 - Heterólogo", value: "1" },
+                { label: "2 - Homólogo", value: "2" },
+                { label: "9 - Ignorado", value: "9" },
+        ],
+      },
+      {
+        name: "amount_serum",
+        label: "Quantidade de Soro Aplicada",
+        kind: "number",
+        schema: z.string().min(1, "Campo obrigatorio"),
+        defaultValue: "",
+      },
+      {
+        name: "serum_infiltration_total",
+        label: "Infriltração de Soro no(s) Local(is) do(s) Ferimento(s) Total",
+        kind: "select",
+        schema: z.string().min(1, "Campo obrigatorio"),
+        defaultValue: "",
+        options: yesNoUnknownOptions,
+      },
+      {
+        name: "serum_infiltration_parcial",
+        label: "Infriltração de Soro no(s) Local(is) do(s) Ferimento(s) Parcial",
+        kind: "select",
+        schema: z.string().min(1, "Campo obrigatorio"),
+        defaultValue: "",
+        options: yesNoUnknownOptions,
+      },
+      {
+        name: "serum_producer",
+        label: "Laborátorio Produtor do Soro Anti-Rábico",
+        kind: "select",
+        schema: z.string().min(1, "Campo obrigatório"),
+        defaultValue: "",
+        options: [
+                { label: "1 - Instituto Butantan", value: "1" },
+                { label: "2 - Instituto Vital Brasil", value: "2" },
+                { label: "3 - Aventis Pasteur", value: "3" },
+                { label: "4- Outro", value: "4"},
+        ], 
+      },
+      {
+        name: "match_number",
+        label: "Número da Partida",
+        kind: "number",
+        schema: z.string().min(1, "Campo obrigatorio"),
+        defaultValue: "",
+      },
+      {
+        name: "adverse_event",
+        label: "Evento Adverso à Vacina/Soro",
+        kind: "select",
+        schema: z.string().min(1, "Campo obrigatorio"),
+        defaultValue: "",
+        options: yesNoUnknownOptions,
+      },
+      {
+        name: "end_case_date",
+        label: "Data do Encerramento do Caso",
+        kind: "date",
+        schema: z.string().min(1, "Campo obrigatório"),
+        defaultValue: "",
+      },
     ],
 } satisfies NotificationSectionDefinition;
+
 
 const sections = [
     generalSection,
@@ -534,8 +740,9 @@ const sections = [
     exposureTypeSection,
     residenceSection,
     woundSection,
+    locationSection,
     treatmentSection,
-    animalAgressorSection,
+    currentTreatmentSection,
 ] as const satisfies readonly NotificationSectionDefinition[];
 
 export const antiRabiesNotificationDefinition = defineNotificationType({
