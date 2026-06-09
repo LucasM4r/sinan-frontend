@@ -101,7 +101,7 @@ const sections = [
             schema: optionalTextSchema,
             defaultValue: "",
       },
-      const residenceSection = {
+const residenceSection = {
     id: "residence",
     title: "Dados de Residência",
     description: "Informações de endereço de residência do paciente.",
