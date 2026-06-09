@@ -46,6 +46,21 @@ const sections = [
             defaultValue: "",
             options: sexOptions,
         },
+         {
+            name: "pregnant",
+            label: "Gestante",
+            kind: "select",
+            schema: optionalTextSchema,
+            defaultValue: "6",
+            options: [
+                { label: "1 - 1º Trimestre", value: "1" },
+                { label: "2 - 2º Trimestre", value: "2" },
+                { label: "3 - 3º Trimestre", value: "3" },
+                { label: "4 - Idade gestacional ignorada", value: "4" },
+                { label: "5 - Não", value: "5" },
+                { label: "6 - Não se aplica", value: "6" },
+                { label: "9 - Ignorado", value: "9" },
+            ],
         {
             name: "race_color",
             label: "Raca/Cor",
@@ -69,6 +84,13 @@ const sections = [
             schema: z.string().min(1, "Cartao SUS obrigatorio"),
             defaultValue: "",
         },
+        {
+            name: "mother_name",
+            label: "Nome da mãe",
+            kind: "text",
+            schema: optionalTextSchema,
+            defaultValue: "",
+        }
         {
             name: "nu_sus_card",
             label: "Número do Cartão SUS",
