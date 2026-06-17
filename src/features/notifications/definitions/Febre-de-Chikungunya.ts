@@ -1,15 +1,33 @@
 import { z } from "zod";
 
 import {
-    defineNotificationType,
-    educationLevelOptions,
-    raceColorOptions,
-    sexOptions,
-    yesNoUnknownOptions,
-    type NotificationSectionDefinition,
-} from "@/features/notifications/definitions/shared"
+  defineNotificationType,
+  educationLevelOptions,
+  raceColorOptions,
+  sexOptions,
+  yesNoUnknownOptions,
+  type NotificationSectionDefinition,
+} from "@/features/notifications/definitions/shared";
 
 const optionalTextSchema = z.string().optional();
+
+const yesNoOptions = [
+  { label: "1 - Sim", value: "1" },
+  { label: "2 - Não", value: "2" },
+];
+
+const yesNoIgnoredOptions = [
+  { label: "1 - Sim", value: "1" },
+  { label: "2 - Não", value: "2" },
+  { label: "9 - Ignorado", value: "9" },
+];
+
+const timeUnitOptions = [
+  { label: "1 - Hora", value: "1" },
+  { label: "2 - Dia", value: "2" },
+  { label: "3 - Mês", value: "3" },
+  { label: "4 - Ano", value: "4" },
+];
 
 const sections = [
   {
@@ -49,21 +67,21 @@ const sections = [
         options: sexOptions,
       },
       {
-            name: "pregnant",
-            label: "Gestante",
-            kind: "select",
-            schema: optionalTextSchema,
-            defaultValue: "6",
-            options: [
-                { label: "1 - 1º Trimestre", value: "1" },
-                { label: "2 - 2º Trimestre", value: "2" },
-                { label: "3 - 3º Trimestre", value: "3" },
-                { label: "4 - Idade gestacional ignorada", value: "4" },
-                { label: "5 - Não", value: "5" },
-                { label: "6 - Não se aplica", value: "6" },
-                { label: "9 - Ignorado", value: "9" },
-           ],
-        }
+        name: "pregnant",
+        label: "Gestante",
+        kind: "select",
+        schema: optionalTextSchema,
+        defaultValue: "6",
+        options: [
+          { label: "1 - 1º Trimestre", value: "1" },
+          { label: "2 - 2º Trimestre", value: "2" },
+          { label: "3 - 3º Trimestre", value: "3" },
+          { label: "4 - Idade gestacional ignorada", value: "4" },
+          { label: "5 - Não", value: "5" },
+          { label: "6 - Não se aplica", value: "6" },
+          { label: "9 - Ignorado", value: "9" },
+        ],
+      },
       {
         name: "race_color",
         label: "Raca/Cor",
@@ -95,125 +113,126 @@ const sections = [
         defaultValue: "",
       },
       {
-            name: "mother_name",
-            label: "Nome da mãe",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
+        name: "mother_name",
+        label: "Nome da mãe",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
       },
-const residenceSection = {
+    ],
+  },
+  {
     id: "residence",
     title: "Dados de Residência",
     description: "Informações de endereço de residência do paciente.",
     columns: 3,
     fields: [
-        {
-            name: "residence_state",
-            label: "UF",
-            kind: "text",
-            schema: z.string().min(2, "UF obrigatória"),
-            defaultValue: "",
-        },
-        {
-            name: "residence_city",
-            label: "Município de Residência",
-            kind: "text",
-            schema: z.string().min(1, "Município obrigatório"),
-            defaultValue: "",
-        },
-        {
-            name: "residence_district",
-            label: "Distrito",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        },
-        {
-            name: "residence_neighborhood",
-            label: "Bairro",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        },
-        {
-            name: "residence_street",
-            label: "Logradouro (rua, avenida,...)",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        },
-        {
-            name: "residence_number",
-            label: "Número",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        },
-        {
-            name: "residence_complement",
-            label: "Complemento (apto., casa, ...)",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        },
-        {
-            name: "residence_geo1",
-            label: "Geo campo 1",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        },
-        {
-            name: "residence_geo2",
-            label: "Geo campo 2",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        },
-        {
-            name: "residence_reference",
-            label: "Ponto de Referência",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        },
-        {
-            name: "residence_cep",
-            label: "CEP",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        },
-        {
-            name: "residence_phone",
-            label: "(DDD) Telefone",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        },
-        {
-            name: "residence_zone",
-            label: "Zona",
-            kind: "select",
-            schema: optionalTextSchema,
-            defaultValue: "9",
-            options: [
-                { label: "1 - Urbana", value: "1" },
-                { label: "2 - Rural", value: "2" },
-                { label: "3 - Periurbana", value: "3" },
-                { label: "9 - Ignorado", value: "9" },
-            ],
-        },
-        {
-            name: "residence_country",
-            label: "País (se residente fora do Brasil)",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        },
+      {
+        name: "residence_state",
+        label: "UF",
+        kind: "text",
+        schema: z.string().min(2, "UF obrigatória"),
+        defaultValue: "",
+      },
+      {
+        name: "residence_city",
+        label: "Município de Residência",
+        kind: "text",
+        schema: z.string().min(1, "Município obrigatório"),
+        defaultValue: "",
+      },
+      {
+        name: "residence_district",
+        label: "Distrito",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "residence_neighborhood",
+        label: "Bairro",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "residence_street",
+        label: "Logradouro (rua, avenida,...)",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "residence_number",
+        label: "Número",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "residence_complement",
+        label: "Complemento (apto., casa, ...)",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "residence_geo1",
+        label: "Geo campo 1",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "residence_geo2",
+        label: "Geo campo 2",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "residence_reference",
+        label: "Ponto de Referência",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "residence_cep",
+        label: "CEP",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "residence_phone",
+        label: "(DDD) Telefone",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "residence_zone",
+        label: "Zona",
+        kind: "select",
+        schema: optionalTextSchema,
+        defaultValue: "9",
+        options: [
+          { label: "1 - Urbana", value: "1" },
+          { label: "2 - Rural", value: "2" },
+          { label: "3 - Periurbana", value: "3" },
+          { label: "9 - Ignorado", value: "9" },
+        ],
+      },
+      {
+        name: "residence_country",
+        label: "País (se residente fora do Brasil)",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
     ],
-} satisfies NotificationSectionDefinition;
-
+  },
   {
     id: "clinical_lab_data",
     title: "Dados clínicos e laboratoriais",
@@ -1000,4 +1019,4 @@ export const chikungunyaFeverNotificationDefinition = defineNotificationType({
   label: "Febre de Chikungunya",
   description: `CASO SUSPEITO de dengue: Pessoa que viva ou tenha viajado nos últimos 14 dias para área onde esteja ocorrendo transmissão de dengue ou tenha presença de Ae.aegypti, que apresente febre, usualmente entre 2 e 7 dias, e apresente duas ou mais das seguintes manifestações: cefaleia, dor retroorbital, petéquias ou prova do laço positiva e leucopenia.\nCASO SUSPEITO de chikungunya: Febre de início súbito e artralgia ou artrite intensa com início agudo, não explicado por outras condições, que resida ou tenha viajado para áreas endêmicas, ou epidêmicas até 14 dias antes do início dos sintomas, ou que tenha vínculo epidemiológico com um caso importado confirmado.`,
   sections,
-})
+});
