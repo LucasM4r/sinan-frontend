@@ -1,119 +1,120 @@
 import { z } from "zod";
 
 import {
-    defineNotificationType,
-    educationLevelOptions,
-    raceColorOptions,
-    sexOptions,
-    type NotificationSectionDefinition,
-} from "@/features/notifications/definitions/shared"
+  defineNotificationType,
+  educationLevelOptions,
+  raceColorOptions,
+  sexOptions,
+  type NotificationSectionDefinition,
+} from "@/features/notifications/definitions/shared";
 
 const optionalTextSchema = z.string().optional();
 
 const sections = [
-{
+  {
     id: "patient",
     title: "Dados do Paciente",
     description: "Capture o retrato do paciente na notificacao, mesmo quando ele ja existe no cadastro geral.",
     columns: 3,
     fields: [
-        {
-            name: "patient_name",
-            label: "Nome",
-            kind: "text",
-            schema: z.string().min(3, "Nome obrigatorio"),
-            defaultValue: "",
-        },
-        {
-            name: "patient_cpf",
-            label: "CPF",
-            kind: "text",
-            schema: z.string().min(11, "CPF obrigatorio"),
-            defaultValue: "",
-        },
-        {
-            name: "patient_birth_date",
-            label: "Data de nascimento",
-            kind: "date",
-            schema: z.string().min(1, "Data de nascimento obrigatoria"),
-            defaultValue: "",
-        },
-        {
-            name: "sex",
-            label: "Sexo",
-            kind: "select",
-            schema: z.string().min(1, "Sexo obrigatorio"),
-            defaultValue: "",
-            options: sexOptions,
-        },
-         {
-            name: "pregnant",
-            label: "Gestante",
-            kind: "select",
-            schema: optionalTextSchema,
-            defaultValue: "6",
-            options: [
-                { label: "1 - 1º Trimestre", value: "1" },
-                { label: "2 - 2º Trimestre", value: "2" },
-                { label: "3 - 3º Trimestre", value: "3" },
-                { label: "4 - Idade gestacional ignorada", value: "4" },
-                { label: "5 - Não", value: "5" },
-                { label: "6 - Não se aplica", value: "6" },
-                { label: "9 - Ignorado", value: "9" },
-            ],
-        {
-            name: "race_color",
-            label: "Raca/Cor",
-            kind: "select",
-            schema: z.string().min(1, "Raca/Cor obrigatoria"),
-            defaultValue: "",
-            options: raceColorOptions,
-        },
-        {
-            name: "education_level",
-            label: "Escolaridade",
-            kind: "select",
-            schema: z.string().min(1, "Escolaridade obrigatoria"),
-            defaultValue: "",
-            options: educationLevelOptions,
-        },
-        {
-            name: "sus_card_number",
-            label: "Cartao SUS",
-            kind: "text",
-            schema: z.string().min(1, "Cartao SUS obrigatorio"),
-            defaultValue: "",
-        },
-        {
-            name: "mother_name",
-            label: "Nome da mãe",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        }
-        {
-            name: "nu_sus_card",
-            label: "Número do Cartão SUS",
-            kind: "text",
-            schema: optionalTextSchema,
-            defaultValue: "",
-        },
-        {
-            name: "residence_city",
-            label: "Municipio",
-            kind: "text",
-            schema: z.string().min(1, "Municipio obrigatorio"),
-            defaultValue: "",
-        },
-        {
-            name: "residence_state",
-            label: "Estado",
-            kind: "text",
-            schema: z.string().min(2, "Estado obrigatorio"),
-            defaultValue: "",
-        },
+      {
+        name: "patient_name",
+        label: "Nome",
+        kind: "text",
+        schema: z.string().min(3, "Nome obrigatorio"),
+        defaultValue: "",
+      },
+      {
+        name: "patient_cpf",
+        label: "CPF",
+        kind: "text",
+        schema: z.string().min(11, "CPF obrigatorio"),
+        defaultValue: "",
+      },
+      {
+        name: "patient_birth_date",
+        label: "Data de nascimento",
+        kind: "date",
+        schema: z.string().min(1, "Data de nascimento obrigatoria"),
+        defaultValue: "",
+      },
+      {
+        name: "sex",
+        label: "Sexo",
+        kind: "select",
+        schema: z.string().min(1, "Sexo obrigatorio"),
+        defaultValue: "",
+        options: sexOptions,
+      },
+      {
+        name: "pregnant",
+        label: "Gestante",
+        kind: "select",
+        schema: optionalTextSchema,
+        defaultValue: "6",
+        options: [
+          { label: "1 - 1º Trimestre", value: "1" },
+          { label: "2 - 2º Trimestre", value: "2" },
+          { label: "3 - 3º Trimestre", value: "3" },
+          { label: "4 - Idade gestacional ignorada", value: "4" },
+          { label: "5 - Não", value: "5" },
+          { label: "6 - Não se aplica", value: "6" },
+          { label: "9 - Ignorado", value: "9" },
+        ],
+      },
+      {
+        name: "race_color",
+        label: "Raca/Cor",
+        kind: "select",
+        schema: z.string().min(1, "Raca/Cor obrigatoria"),
+        defaultValue: "",
+        options: raceColorOptions,
+      },
+      {
+        name: "education_level",
+        label: "Escolaridade",
+        kind: "select",
+        schema: z.string().min(1, "Escolaridade obrigatoria"),
+        defaultValue: "",
+        options: educationLevelOptions,
+      },
+      {
+        name: "sus_card_number",
+        label: "Cartao SUS",
+        kind: "text",
+        schema: z.string().min(1, "Cartao SUS obrigatorio"),
+        defaultValue: "",
+      },
+      {
+        name: "mother_name",
+        label: "Nome da mãe",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "nu_sus_card",
+        label: "Número do Cartão SUS",
+        kind: "text",
+        schema: optionalTextSchema,
+        defaultValue: "",
+      },
+      {
+        name: "residence_city",
+        label: "Municipio",
+        kind: "text",
+        schema: z.string().min(1, "Municipio obrigatorio"),
+        defaultValue: "",
+      },
+      {
+        name: "residence_state",
+        label: "Estado",
+        kind: "text",
+        schema: z.string().min(2, "Estado obrigatorio"),
+        defaultValue: "",
+      },
     ],
-},
+  },
   {
     id: "complementary_data",
     title: "Dados Complementares do Caso",
@@ -411,7 +412,7 @@ const sections = [
     ],
   },
 
-] as const satisfies readonly NotificationSectionDefinition[]
+] as const satisfies readonly NotificationSectionDefinition[];
 
 export const schistosomiasisNotificationDefinition = defineNotificationType({
   id: 5,
@@ -419,4 +420,4 @@ export const schistosomiasisNotificationDefinition = defineNotificationType({
   label: "ESQUISTOSSOMOSE",
   description: `Caso CONFIRMADO: Todo indivíduo que apresente ovos viáveis de Schistosoma mansoni nas fezes ou em tecido submetido à biópsia.`,
   sections,
-})
+});
